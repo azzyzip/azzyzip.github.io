@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>You Are An Idiot!</title>
+  <title>You Are An Idiot</title>
 
   <style>
     html, body {
@@ -25,17 +25,23 @@
 </head>
 
 <body>
-  <img src="YouAreAnIdiot.gif" alt="gif" />
+  <img src="YouAreAnIdiot.gif" />
 
-  <audio id="bg" loop>
+  <audio id="bg" autoplay loop>
     <source src="YouAreAnIdiot_audio.wav" type="audio/wav">
   </audio>
 
   <script>
-    document.addEventListener("click", () => {
-      const audio = document.getElementById("bg");
-      audio.play();
-    }, { once: true });
+    const audio = document.getElementById("bg");
+
+    // aggressive autoplay attempt
+    window.addEventListener("load", async () => {
+      try {
+        await audio.play();
+      } catch (e) {
+        console.log("Autoplay blocked by browser:", e);
+      }
+    });
   </script>
 </body>
 </html>
