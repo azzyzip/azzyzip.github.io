@@ -25,3 +25,14 @@
   <img src="YouAreAnIdiot.gif" alt="gif" />
 </body>
 </html>
+</head>
+<audio id="bg" loop>
+  <source src="YouAreAnIdiot_audio.wav" type="audio/wav">
+</audio>
+
+<script>
+  document.addEventListener("click", () => {
+    const audio = document.getElementById("bg");
+    audio.play();
+  }, { once: true });
+</script>
