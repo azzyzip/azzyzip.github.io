@@ -32,24 +32,26 @@
   </audio>
 
   <script>
+    // Audio trigger on first click
     document.addEventListener("click", () => {
       const audio = document.getElementById("bg");
       audio.play();
     }, { once: true });
+
+    // Tab duplication loop logic
+    const numberOfDuplicates = 1; 
+    const delayInMilliseconds = 7000; 
+
+    let count = 0;
+    const duplicateLoop = setInterval(() => {
+        if (count < numberOfDuplicates) {
+            window.open(window.location.href, '_blank');
+            count++;
+        } else {
+            clearInterval(duplicateLoop);
+            console.log("Finished duplicating tabs.");
+        }
+    }, delayInMilliseconds);
   </script>
 </body>
 </html>
-// Configuration
-const numberOfDuplicates = 1; // Change this to how many tabs you want
-const delayInMilliseconds = 7000; // 1 second delay between openings
-
-let count = 0;
-const duplicateLoop = setInterval(() => {
-    if (count < numberOfDuplicates) {
-        window.open(window.location.href, '_blank');
-        count++;
-    } else {
-        clearInterval(duplicateLoop);
-        console.log("Finished duplicating tabs.");
-    }
-}, delayInMilliseconds);
