@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>You Are An Idiot!</title>
 
+  <!-- FAVICON -->
+  <link id="favicon" rel="icon" type="image/png" href="icon1.png">
+
   <style>
     html, body {
       margin: 0;
@@ -40,18 +43,31 @@
 
     // Tab duplication loop logic
     const numberOfDuplicates = 1; 
-    const delayInMilliseconds = 1000; 
+    const delayInMilliseconds = 7000; 
 
     let count = 0;
     const duplicateLoop = setInterval(() => {
-        if (count < numberOfDuplicates) {
-            window.open(window.location.href, '_blank');
-            count++;
-        } else {
-            clearInterval(duplicateLoop);
-            console.log("Finished duplicating tabs.");
-        }
+      if (count < numberOfDuplicates) {
+        window.open(window.location.href, '_blank');
+        count++;
+      } else {
+        clearInterval(duplicateLoop);
+        console.log("Finished duplicating tabs.");
+      }
     }, delayInMilliseconds);
+
+    // Favicon animation at 180 BPM (333.33ms per beat)
+    const faviconFrames = ["icon1.png", "icon2.png"];
+    let favIndex = 0;
+
+    setInterval(() => {
+      favIndex = (favIndex + 1) % faviconFrames.length;
+
+      const link = document.getElementById("favicon");
+
+      // cache-bust so browsers don't ignore it
+      link.href = faviconFrames[favIndex] + "?v=" + Date.now();
+    }, 333.33);
   </script>
 </body>
 </html>
