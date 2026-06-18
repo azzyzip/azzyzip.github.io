@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GIF</title>
+  <title>You Are An Idiot!</title>
+
   <style>
     html, body {
       margin: 0;
       height: 100%;
-      background: black; /* optional */
+      background: black;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
     }
 
     img {
@@ -21,18 +23,19 @@
     }
   </style>
 </head>
+
 <body>
   <img src="YouAreAnIdiot.gif" alt="gif" />
+
+  <audio id="bg" loop>
+    <source src="YouAreAnIdiot_audio.wav" type="audio/wav">
+  </audio>
+
+  <script>
+    document.addEventListener("click", () => {
+      const audio = document.getElementById("bg");
+      audio.play();
+    }, { once: true });
+  </script>
 </body>
 </html>
-</head>
-<audio id="bg" loop>
-  <source src="YouAreAnIdiot_audio.wav" type="audio/wav">
-</audio>
-
-<script>
-  document.addEventListener("click", () => {
-    const audio = document.getElementById("bg");
-    audio.play();
-  }, { once: true });
-</script>
