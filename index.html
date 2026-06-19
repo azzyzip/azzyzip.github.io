@@ -1,73 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>You Are An Idiot!</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- FAVICON -->
-  <link id="favicon" rel="icon" type="image/png" href="icon1.png">
+<title>azzy.zip</title>
 
-  <style>
-    html, body {
-      margin: 0;
-      height: 100%;
-      background: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
+<!-- Favicons -->
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-    img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-    }
-  </style>
+<meta name="theme-color" content="#0568D3">
+
+<style>
+:root {
+    --bg: #0C0C0E;
+    --accent: #0568D3;
+    --text: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: #111114;
+    border-right: 2px solid var(--accent);
+    transition: left 0.3s ease;
+    padding-top: 70px;
+}
+
+.sidebar.open {
+    left: 0;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    transition: 0.2s;
+}
+
+.sidebar a:hover {
+    background: var(--accent);
+}
+
+/* Header */
+.header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 2px solid var(--accent);
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* Main Content */
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px);
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #aaa;
+}
+</style>
 </head>
-
 <body>
-  <img src="YouAreAnIdiot.gif" alt="gif" />
 
-  <audio id="bg" loop>
-    <source src="YouAreAnIdiot_audio.wav" type="audio/wav">
-  </audio>
+<nav class="sidebar" id="sidebar">
+    <a href="/">Home</a>
+    <a href="/idiot/">You Are An Idiot Revive</a>
+    <a href="/projects/">Projects</a>
+    <a href="/blog/">Blog</a>
+    <a href="/about/">About</a>
+</nav>
 
-  <script>
-    // Audio trigger on first click
-    document.addEventListener("click", () => {
-      const audio = document.getElementById("bg");
-      audio.play();
-    }, { once: true });
+<header class="header">
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</header>
 
-    // Tab duplication loop logic
-    const numberOfDuplicates = 1; 
-    const delayInMilliseconds = 1000; 
+<main class="content">
+    <div>
+        <h1>azzy.zip</h1>
+        <p>Welcome to my corner of the internet.</p>
+    </div>
+</main>
 
-    let count = 0;
-    const duplicateLoop = setInterval(() => {
-      if (count < numberOfDuplicates) {
-        window.open(window.location.href, '_blank');
-        count++;
-      } else {
-        clearInterval(duplicateLoop);
-        console.log("Finished duplicating tabs.");
-      }
-    }, delayInMilliseconds);
+<script>
+function toggleMenu() {
+    document.getElementById('sidebar').classList.toggle('open');
+}
+</script>
 
-    // Favicon animation at 180 BPM (333.33ms per beat)
-    const faviconFrames = ["icon1.png", "icon2.png"];
-    let favIndex = 0;
-
-    setInterval(() => {
-      favIndex = (favIndex + 1) % faviconFrames.length;
-
-      const link = document.getElementById("favicon");
-
-      // cache-bust so browsers don't ignore it
-      link.href = faviconFrames[favIndex] + "?v=" + Date.now();
-    }, 333.33);
-  </script>
 </body>
 </html>
