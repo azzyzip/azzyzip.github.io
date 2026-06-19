@@ -6,7 +6,6 @@
 
 <title>azzy.zip</title>
 
-<!-- Favicons -->
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
@@ -18,7 +17,7 @@
 :root {
     --bg: #0C0C0E;
     --accent: #0568D3;
-    --text: #ffffff;
+    --text: #FFFFFF;
 }
 
 * {
@@ -29,38 +28,9 @@
 }
 
 body {
+    min-height: 100vh;
     background: var(--bg);
     color: var(--text);
-    min-height: 100vh;
-}
-
-/* Sidebar */
-.sidebar {
-    position: fixed;
-    left: -250px;
-    top: 0;
-    width: 250px;
-    height: 100%;
-    background: #111114;
-    border-right: 2px solid var(--accent);
-    transition: left 0.3s ease;
-    padding-top: 70px;
-}
-
-.sidebar.open {
-    left: 0;
-}
-
-.sidebar a {
-    display: block;
-    color: white;
-    text-decoration: none;
-    padding: 15px 20px;
-    transition: 0.2s;
-}
-
-.sidebar a:hover {
-    background: var(--accent);
 }
 
 /* Header */
@@ -75,17 +45,62 @@ body {
 .menu-btn {
     background: none;
     border: none;
-    color: white;
+    color: var(--text);
     font-size: 28px;
     cursor: pointer;
 }
 
-/* Main Content */
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: #111114;
+    border-right: 2px solid var(--accent);
+    transition: left 0.3s ease;
+    padding-top: 70px;
+    z-index: 1000;
+}
+
+.sidebar.open {
+    left: 0;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+}
+
+.sidebar a:hover {
+    background: var(--accent);
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    z-index: 999;
+}
+
+.overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Content */
 .content {
+    min-height: calc(100vh - 60px);
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 60px);
     text-align: center;
     padding: 20px;
 }
@@ -100,18 +115,21 @@ p {
 }
 </style>
 </head>
+
 <body>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
 <nav class="sidebar" id="sidebar">
     <a href="/">Home</a>
-    <a href="/idiot/">You Are An Idiot Revive</a>
+    <a href="/idiot/">You Are An Idiot</a>
     <a href="/projects/">Projects</a>
     <a href="/blog/">Blog</a>
     <a href="/about/">About</a>
 </nav>
 
 <header class="header">
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <button class="menu-btn" id="menuBtn" onclick="toggleMenu()">☰</button>
 </header>
 
 <main class="content">
@@ -123,7 +141,14 @@ p {
 
 <script>
 function toggleMenu() {
-    document.getElementById('sidebar').classList.toggle('open');
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    const btn = document.getElementById("menuBtn");
+
+    const isOpen = sidebar.classList.toggle("open");
+    overlay.classList.toggle("show");
+
+    btn.textContent = isOpen ? "×" : "☰";
 }
 </script>
 
