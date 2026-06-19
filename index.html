@@ -79,6 +79,14 @@ body {
     background: var(--accent);
 }
 
+/* Close button inside sidebar */
+.menu-btn.inside {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 28px;
+}
+
 /* Overlay */
 .overlay {
     position: fixed;
@@ -86,7 +94,7 @@ body {
     background: rgba(0,0,0,0.5);
     opacity: 0;
     visibility: hidden;
-    transition: 0.3s;
+    transition: opacity 0.3s ease;
     z-index: 999;
 }
 
@@ -121,6 +129,8 @@ p {
 <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
 <nav class="sidebar" id="sidebar">
+    <button class="menu-btn inside" onclick="toggleMenu()">×</button>
+
     <a href="/">Home</a>
     <a href="/idiot/">You Are An Idiot</a>
     <a href="/projects/">Projects</a>
@@ -129,7 +139,7 @@ p {
 </nav>
 
 <header class="header">
-    <button class="menu-btn" id="menuBtn" onclick="toggleMenu()">☰</button>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
 </header>
 
 <main class="content">
@@ -141,14 +151,8 @@ p {
 
 <script>
 function toggleMenu() {
-    const sidebar = document.getElementById("sidebar");
-    const overlay = document.getElementById("overlay");
-    const btn = document.getElementById("menuBtn");
-
-    const isOpen = sidebar.classList.toggle("open");
-    overlay.classList.toggle("show");
-
-    btn.textContent = isOpen ? "×" : "☰";
+    document.getElementById("sidebar").classList.toggle("open");
+    document.getElementById("overlay").classList.toggle("show");
 }
 </script>
 
